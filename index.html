@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>罪状選択</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
+    <h2>罪状選択</h2>
+
+    <label>
+        <input type="checkbox" id="murder" value="100000" data-jail="15"> 殺人罪 (罰金 100,000円, 刑務時間 15分)
+    </label>
+    <label>
+        <input type="checkbox" id="weapon" value="10000" data-jail="0"> 銃刀法違反 (罰金 10,000円, 刑務時間 無し)
+    </label>
+
+    <button onclick="calculatePenalty()">計算</button>
+
+    <div id="output"></div>
+
+    <button onclick="copyToClipboard()">コピー</button>
+
+    <script>
+        function calculatePenalty() {
+            let fine = 0;
+            let jailTime = 0;
+
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+            checkboxes.forEach(checkbox => {
+                fine += parseInt(checkbox.value, 10);
+                jailTime += parseInt(checkbox.dataset.jail, 10);
+            });
+
+            let jailText = (jailTime === 0) ? "無し" : jailTime + "分";
+            let result = `罰金: ${fine.toLocaleString()}円 / 刑務時間: ${jailText}`;
+
+            document.getElementById("output").innerText = result;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById("output").innerText;
+            if (!outputText) return;
+
+            navigator.clipboard.writeText(outputText).then(() => {
+                alert("コピーしました！");
+            }).catch(err => {
+                alert("コピーに失敗しました: " + err);
+            });
+        }
+    </script>
+
+</body>
+</html>
