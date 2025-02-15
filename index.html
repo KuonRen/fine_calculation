@@ -26,42 +26,49 @@
             gap: 8px;
         }
         .crime-item {
-            padding: 6px 12px; /* 内側の余白 */
+            padding: 6px 12px;
             border: 2px solid #ccc;
             background-color: #f9f9f9;
             cursor: pointer;
             text-align: center;
-            display: inline-block; /* サイズを文字の幅に合わせる */
-            white-space: nowrap; /* テキストを改行させない */
+            display: inline-block;
+            white-space: nowrap;
             box-sizing: border-box;
             transition: background-color 0.3s, border-color 0.3s;
-            font-size: 14px; /* フォントサイズ調整 */
-            margin: 4px; /* ボタン間の余白 */
+            font-size: 14px;
+            margin: 4px;
         }
         .crime-item.selected {
             background-color: #007bff;
             color: white;
             border-color: #0056b3;
         }
+        .output-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         textarea {
-            width: 100%;
+            width: 70%;
             height: 100px;
             margin-top: 10px;
         }
         button {
-            margin-top: 10px;
-            padding: 12px 20px; /* 高さを増やして広げる */
+            width: 25%;
+            height: 100px;
             cursor: pointer;
-            font-size: 16px; /* フォントサイズを少し大きく */
+            font-size: 16px;
             border: none;
             background-color: #007bff;
             color: white;
-            border-radius: 5px; /* 四角形の角を少し丸める */
+            border-radius: 5px;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
         button:hover {
-            background-color: #0056b3; /* ホバー時の色 */
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -69,36 +76,33 @@
     <div class="container">
         <h2>罪状選択ツール</h2>
 
-        <!-- 強盗系 -->
         <div class="category">
             <div class="category-title">【強盗罪】</div>
             <div class="crime-list" id="robberyList"></div>
         </div>
 
-        <!-- 強盗未遂系 -->
         <div class="category">
             <div class="category-title">【強盗未遂罪】</div>
             <div class="crime-list" id="robberyAttemptList"></div>
         </div>
 
-        <!-- 殺人系 -->
         <div class="category">
             <div class="category-title">【殺人罪・殺人未遂罪】</div>
             <div class="crime-list" id="murderList"></div>
         </div>
 
-        <!-- その他の罪状 -->
         <div class="category">
             <div class="category-title">【その他】</div>
             <div class="crime-list" id="otherList"></div>
         </div>
 
-        <textarea id="output" readonly></textarea>
-        <button onclick="copyToClipboard()">コピー</button>
+        <div class="output-container">
+            <textarea id="output" readonly></textarea>
+            <button onclick="copyToClipboard()">コピー</button>
+        </div>
     </div>
 
     <script>
-        // 罪状データ
         const crimes = {
             robbery: [
                 { name: "第5級強盗罪", fine: 10000, jailTime: 10 },
@@ -162,25 +166,20 @@
             const index = crimeDiv.dataset.index;
             const crime = crimes[category][index];
 
-            if (crimeDiv.classList.contains('selected')) {
-                crimeDiv.classList.remove('selected');
-                selectedCrimes = selectedCrimes.filter(c => c.name !== crime.name);
-            } else {
-                crimeDiv.classList.add('selected');
-                selectedCrimes.push(crime);
-            }
+            crimeDiv.classList.toggle('selected');
+            selectedCrimes = crimeDiv.classList.contains('selected')
+                ? [...selectedCrimes, crime]
+                : selectedCrimes.filter(c => c.name !== crime.name);
 
             updateOutput();
         }
 
         function updateOutput() {
-            const crimeNames = selectedCrimes.map(c => c.name).join(', ');
-            const totalFine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
-            let totalJailTime = selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0);
+            const text = selectedCrimes.map(c => c.name).join(', ');
+            const fine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
+            const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
 
-            if (totalJailTime > 60) totalJailTime = 60;
-
-            output.value = `罪状: ${crimeNames}\n\n罰金合計: ${totalFine}\n刑務時間合計: ${totalJailTime}分`;
+            output.value = `罪状: ${text}\n\n罰金合計: ${fine}\n刑務時間合計: ${jail}分`;
         }
 
         function copyToClipboard() {
