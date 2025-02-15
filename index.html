@@ -26,15 +26,17 @@
             gap: 8px;
         }
         .crime-item {
-            padding: 6px;
+            padding: 6px 12px; /* 内側の余白 */
             border: 2px solid #ccc;
             background-color: #f9f9f9;
             cursor: pointer;
             text-align: center;
-            width: calc(33.33% - 10px);
+            display: inline-block; /* サイズを文字の幅に合わせる */
+            white-space: nowrap; /* テキストを改行させない */
             box-sizing: border-box;
             transition: background-color 0.3s, border-color 0.3s;
-            font-size: 14px;
+            font-size: 14px; /* フォントサイズ調整 */
+            margin: 4px; /* ボタン間の余白 */
         }
         .crime-item.selected {
             background-color: #007bff;
