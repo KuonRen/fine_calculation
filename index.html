@@ -125,7 +125,12 @@
         function updateOutput() {
             const crimeNames = selectedCrimes.map(c => c.name).join(', ');
             const totalFine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
-            const totalJailTime = selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0);
+            let totalJailTime = selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0);
+
+            // 刑務作業時間の上限を60分に設定
+            if (totalJailTime > 60) {
+                totalJailTime = 60;
+            }
 
             output.value = `罪状: ${crimeNames}\n\n罰金合計: ${totalFine}\n刑務時間合計: ${totalJailTime}分`;
         }
