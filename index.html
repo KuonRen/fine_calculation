@@ -55,11 +55,11 @@
         }
         button {
             width: 25%;
-            height: 80px; /* 縦幅を縮小 */
+            height: 80px;
             cursor: pointer;
             font-size: 16px;
             border: none;
-            background-color: #6c757d; /* 灰色 */
+            background-color: #6c757d;
             color: white;
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -68,7 +68,7 @@
             justify-content: center;
         }
         button:hover {
-            background-color: #5a6268; /* ホバー時の暗い灰色 */
+            background-color: #5a6268;
         }
     </style>
 </head>
@@ -105,18 +105,18 @@
     <script>
         const crimes = {
             robbery: [
-                { name: "第5級強盗罪", fine: 10000, jailTime: 10 },
-                { name: "第4級強盗罪", fine: 15000, jailTime: 15 },
-                { name: "第3級強盗罪", fine: 20000, jailTime: 20 },
+                { name: "第1級強盗罪", fine: 30000, jailTime: 30 },
                 { name: "第2級強盗罪", fine: 25000, jailTime: 25 },
-                { name: "第1級強盗罪", fine: 30000, jailTime: 30 }
+                { name: "第3級強盗罪", fine: 20000, jailTime: 20 },
+                { name: "第4級強盗罪", fine: 15000, jailTime: 15 },
+                { name: "第5級強盗罪", fine: 10000, jailTime: 10 }
             ],
             robberyAttempt: [
-                { name: "第5級強盗未遂罪", fine: 5000, jailTime: 5 },
-                { name: "第4級強盗未遂罪", fine: 7500, jailTime: 7 },
-                { name: "第3級強盗未遂罪", fine: 10000, jailTime: 10 },
+                { name: "第1級強盗未遂罪", fine: 20000, jailTime: 20 },
                 { name: "第2級強盗未遂罪", fine: 15000, jailTime: 15 },
-                { name: "第1級強盗未遂罪", fine: 20000, jailTime: 20 }
+                { name: "第3級強盗未遂罪", fine: 10000, jailTime: 10 },
+                { name: "第4級強盗未遂罪", fine: 7500, jailTime: 7 },
+                { name: "第5級強盗未遂罪", fine: 5000, jailTime: 5 }
             ],
             murder: [
                 { name: "殺人罪", fine: 100000, jailTime: 60 },
