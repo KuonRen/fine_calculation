@@ -10,103 +10,184 @@
             margin: 20px;
         }
         .container {
-            display: flex;
-            justify-content: space-between;
-            max-width: 800px;
+            max-width: 600px;
             margin: auto;
         }
-        .left-section {
-            width: 70%;
+        .category {
+            margin-bottom: 20px;
         }
-        .right-section {
-            width: 30%;
-            display: flex;
-            align-items: center;
+        .category-title {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
-        .output-container {
+        .crime-list {
             display: flex;
-            align-items: center;
-            width: 100%;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .crime-item {
+            padding: 6px 12px; /* 内側の余白 */
+            border: 2px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block; /* サイズを文字の幅に合わせる */
+            white-space: nowrap; /* テキストを改行させない */
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s;
+            font-size: 14px; /* フォントサイズ調整 */
+            margin: 4px; /* ボタン間の余白 */
+        }
+        .crime-item.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
         }
         textarea {
-            width: 70%;
-            height: 120px;
-            resize: none;
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
         }
-        .copy-btn {
-            width: 25%;
-            height: 120px;
-            margin-left: 5%;
-            font-size: 16px;
+        button {
+            margin-top: 10px;
+            padding: 12px 20px; /* 高さを増やして広げる */
             cursor: pointer;
+            font-size: 16px; /* フォントサイズを少し大きく */
             border: none;
             background-color: #007bff;
             color: white;
-            border-radius: 5px;
+            border-radius: 5px; /* 四角形の角を少し丸める */
             transition: background-color 0.3s;
         }
-        .copy-btn:hover {
-            background-color: #0056b3;
+
+        button:hover {
+            background-color: #0056b3; /* ホバー時の色 */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="left-section">
-            <h2>罪状選択ツール</h2>
-            <div id="crimeList"></div>
+        <h2>罪状選択ツール</h2>
+
+        <!-- 強盗系 -->
+        <div class="category">
+            <div class="category-title">【強盗罪】</div>
+            <div class="crime-list" id="robberyList"></div>
         </div>
 
-        <div class="right-section">
-            <div class="output-container">
-                <textarea id="output" readonly></textarea>
-                <button class="copy-btn" onclick="copyToClipboard()">コピー</button>
-            </div>
+        <!-- 強盗未遂系 -->
+        <div class="category">
+            <div class="category-title">【強盗未遂罪】</div>
+            <div class="crime-list" id="robberyAttemptList"></div>
         </div>
+
+        <!-- 殺人系 -->
+        <div class="category">
+            <div class="category-title">【殺人罪・殺人未遂罪】</div>
+            <div class="crime-list" id="murderList"></div>
+        </div>
+
+        <!-- その他の罪状 -->
+        <div class="category">
+            <div class="category-title">【その他】</div>
+            <div class="crime-list" id="otherList"></div>
+        </div>
+
+        <textarea id="output" readonly></textarea>
+        <button onclick="copyToClipboard()">コピー</button>
     </div>
 
     <script>
-        const crimes = [
-            "第5級強盗罪", "第4級強盗罪", "第3級強盗罪", "第2級強盗罪", "第1級強盗罪",
-            "殺人罪", "殺人未遂罪", "拉致監禁罪", "公然わいせつ罪", "車両窃盗罪"
-        ];
+        // 罪状データ
+        const crimes = {
+            robbery: [
+                { name: "第5級強盗罪", fine: 10000, jailTime: 10 },
+                { name: "第4級強盗罪", fine: 15000, jailTime: 15 },
+                { name: "第3級強盗罪", fine: 20000, jailTime: 20 },
+                { name: "第2級強盗罪", fine: 25000, jailTime: 25 },
+                { name: "第1級強盗罪", fine: 30000, jailTime: 30 }
+            ],
+            robberyAttempt: [
+                { name: "第5級強盗未遂罪", fine: 5000, jailTime: 5 },
+                { name: "第4級強盗未遂罪", fine: 7500, jailTime: 7 },
+                { name: "第3級強盗未遂罪", fine: 10000, jailTime: 10 },
+                { name: "第2級強盗未遂罪", fine: 15000, jailTime: 15 },
+                { name: "第1級強盗未遂罪", fine: 20000, jailTime: 20 }
+            ],
+            murder: [
+                { name: "殺人罪", fine: 100000, jailTime: 60 },
+                { name: "殺人未遂罪", fine: 75000, jailTime: 45 }
+            ],
+            other: [
+                { name: "拉致監禁罪", fine: 50000, jailTime: 30 },
+                { name: "公然わいせつ罪", fine: 5000, jailTime: 5 },
+                { name: "車両窃盗罪", fine: 20000, jailTime: 15 },
+                { name: "車両窃盗未遂罪", fine: 10000, jailTime: 10 },
+                { name: "窃盗罪", fine: 15000, jailTime: 15 },
+                { name: "窃盗未遂罪", fine: 7500, jailTime: 7 },
+                { name: "暴行罪", fine: 10000, jailTime: 10 },
+                { name: "器物損壊罪", fine: 8000, jailTime: 8 },
+                { name: "公務執行妨害罪", fine: 20000, jailTime: 20 },
+                { name: "違法薬物売買罪", fine: 50000, jailTime: 30 },
+                { name: "違法薬物所持罪", fine: 20000, jailTime: 15 },
+                { name: "指定違法物所持罪", fine: 15000, jailTime: 10 },
+                { name: "共犯罪", fine: 30000, jailTime: 20 },
+                { name: "IDカード、免許証不携帯", fine: 5000, jailTime: 5 },
+                { name: "ガンライセンス不携帯、無免許", fine: 10000, jailTime: 10 },
+                { name: "テロ罪", fine: 150000, jailTime: 90 },
+                { name: "業務妨害罪", fine: 10000, jailTime: 10 }
+            ]
+        };
 
         let selectedCrimes = [];
 
-        function createCrimeButtons() {
-            const container = document.getElementById("crimeList");
-            crimes.forEach(crime => {
+        function createCrimeButtons(category, containerId) {
+            const container = document.getElementById(containerId);
+            crimes[category].forEach((crime, index) => {
                 const crimeDiv = document.createElement('div');
-                crimeDiv.textContent = crime;
                 crimeDiv.classList.add('crime-item');
-                crimeDiv.onclick = () => toggleCrimeSelection(crime, crimeDiv);
+                crimeDiv.textContent = crime.name;
+                crimeDiv.dataset.category = category;
+                crimeDiv.dataset.index = index;
+                crimeDiv.addEventListener('click', toggleCrimeSelection);
                 container.appendChild(crimeDiv);
             });
         }
 
-        function toggleCrimeSelection(crime, element) {
-            if (selectedCrimes.includes(crime)) {
-                selectedCrimes = selectedCrimes.filter(c => c !== crime);
-                element.classList.remove('selected');
+        Object.keys(crimes).forEach(category => createCrimeButtons(category, category + 'List'));
+
+        function toggleCrimeSelection(event) {
+            const crimeDiv = event.target;
+            const category = crimeDiv.dataset.category;
+            const index = crimeDiv.dataset.index;
+            const crime = crimes[category][index];
+
+            if (crimeDiv.classList.contains('selected')) {
+                crimeDiv.classList.remove('selected');
+                selectedCrimes = selectedCrimes.filter(c => c.name !== crime.name);
             } else {
+                crimeDiv.classList.add('selected');
                 selectedCrimes.push(crime);
-                element.classList.add('selected');
             }
+
             updateOutput();
         }
 
         function updateOutput() {
-            document.getElementById("output").value = selectedCrimes.join(', ');
+            const crimeNames = selectedCrimes.map(c => c.name).join(', ');
+            const totalFine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
+            let totalJailTime = selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0);
+
+            if (totalJailTime > 60) totalJailTime = 60;
+
+            output.value = `罪状: ${crimeNames}\n\n罰金合計: ${totalFine}\n刑務時間合計: ${totalJailTime}分`;
         }
 
         function copyToClipboard() {
-            const output = document.getElementById("output");
             output.select();
-            document.execCommand("copy");
+            document.execCommand('copy');
             alert("コピーしました！");
         }
-
-        createCrimeButtons();
     </script>
 </body>
 </html>
