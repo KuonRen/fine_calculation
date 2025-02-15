@@ -10,7 +10,7 @@
             margin: 20px;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
         }
         .crime-list {
@@ -19,7 +19,19 @@
             gap: 10px;
         }
         .crime-item {
-            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            text-align: center;
+            width: calc(50% - 10px);
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .crime-item.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
         }
         textarea {
             width: 100%;
@@ -56,7 +68,7 @@
             { name: "第3級強盗未遂罪", fine: 10000, jailTime: 10 },
             { name: "第2級強盗未遂罪", fine: 15000, jailTime: 15 },
             { name: "第1級強盗未遂罪", fine: 20000, jailTime: 20 },
-            { name: "公然わいせつ罪(軽犯罪)", fine: 5000, jailTime: 5 },
+            { name: "公然わいせつ罪", fine: 5000, jailTime: 5 },
             { name: "車両窃盗罪", fine: 20000, jailTime: 15 },
             { name: "車両窃盗未遂罪", fine: 10000, jailTime: 10 },
             { name: "窃盗罪", fine: 15000, jailTime: 15 },
@@ -78,38 +90,45 @@
 
         const crimeListElement = document.getElementById('crimeList');
         const output = document.getElementById('output');
+        let selectedCrimes = [];
 
         // 罪状リストをHTMLに追加
-        crimes.forEach(crime => {
-            const label = document.createElement('label');
-            label.classList.add('crime-item');
-            label.innerHTML = `<input type="checkbox" data-name="${crime.name}" data-fine="${crime.fine}" data-jail="${crime.jailTime}"> ${crime.name}`;
-            crimeListElement.appendChild(label);
+        crimes.forEach((crime, index) => {
+            const crimeDiv = document.createElement('div');
+            crimeDiv.classList.add('crime-item');
+            crimeDiv.textContent = crime.name;
+            crimeDiv.dataset.index = index;
+            crimeDiv.addEventListener('click', toggleCrimeSelection);
+            crimeListElement.appendChild(crimeDiv);
         });
 
-        // 罪状チェック時の計算処理
-        function updateOutput() {
-            let selectedCrimes = [];
-            let totalFine = 0;
-            let totalJailTime = 0;
+        // 罪状の選択・解除
+        function toggleCrimeSelection(event) {
+            const crimeDiv = event.target;
+            const index = crimeDiv.dataset.index;
+            const crime = crimes[index];
 
-            document.querySelectorAll('.crime-item input:checked').forEach(checkbox => {
-                const name = checkbox.getAttribute('data-name');
-                const fine = parseInt(checkbox.getAttribute('data-fine'));
-                const jailTime = parseInt(checkbox.getAttribute('data-jail'));
+            if (crimeDiv.classList.contains('selected')) {
+                // すでに選択されている場合は解除
+                crimeDiv.classList.remove('selected');
+                selectedCrimes = selectedCrimes.filter(c => c.name !== crime.name);
+            } else {
+                // 選択されていない場合は追加
+                crimeDiv.classList.add('selected');
+                selectedCrimes.push(crime);
+            }
 
-                selectedCrimes.push(name);
-                totalFine += fine;
-                totalJailTime += jailTime;
-            });
-
-            output.value = `罪状:\n${selectedCrimes.join('\n')}\n\n罰金合計: ${totalFine}\n刑務時間合計: ${totalJailTime}分`;
+            updateOutput();
         }
 
-        // チェックボックスの変更を監視
-        document.querySelectorAll('.crime-item input').forEach(checkbox => {
-            checkbox.addEventListener('change', updateOutput);
-        });
+        // 出力欄の更新
+        function updateOutput() {
+            const crimeNames = selectedCrimes.map(c => c.name).join(', ');
+            const totalFine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
+            const totalJailTime = selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0);
+
+            output.value = `罪状: ${crimeNames}\n\n罰金合計: ${totalFine}\n刑務時間合計: ${totalJailTime}分`;
+        }
 
         // コピー機能
         function copyToClipboard() {
