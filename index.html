@@ -43,7 +43,7 @@
     </div>
 
     <script>
-        // 罪状データ（罰金・刑務時間）
+        // 罪状データ
         const crimes = [
             { name: "拉致監禁罪", fine: 50000, jailTime: 30 },
             { name: "第5級強盗罪", fine: 10000, jailTime: 10 },
@@ -83,7 +83,7 @@
         crimes.forEach(crime => {
             const label = document.createElement('label');
             label.classList.add('crime-item');
-            label.innerHTML = `<input type="checkbox" data-name="${crime.name}" data-fine="${crime.fine}" data-jail="${crime.jailTime}"> ${crime.name} (罰金: ¥${crime.fine}, 刑務時間: ${crime.jailTime}分)`;
+            label.innerHTML = `<input type="checkbox" data-name="${crime.name}" data-fine="${crime.fine}" data-jail="${crime.jailTime}"> ${crime.name}`;
             crimeListElement.appendChild(label);
         });
 
@@ -98,12 +98,12 @@
                 const fine = parseInt(checkbox.getAttribute('data-fine'));
                 const jailTime = parseInt(checkbox.getAttribute('data-jail'));
 
-                selectedCrimes.push(`${name} (¥${fine}, ${jailTime}分)`);
+                selectedCrimes.push(name);
                 totalFine += fine;
                 totalJailTime += jailTime;
             });
 
-            output.value = `選択された罪状:\n${selectedCrimes.join('\n')}\n\n罰金合計: ¥${totalFine}\n刑務時間合計: ${totalJailTime}分`;
+            output.value = `罪状:\n${selectedCrimes.join('\n')}\n\n罰金合計: ${totalFine}\n刑務時間合計: ${totalJailTime}分`;
         }
 
         // チェックボックスの変更を監視
