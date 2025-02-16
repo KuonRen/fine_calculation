@@ -119,9 +119,9 @@
             padding: 10px;
             font-size: 14px;
             border-radius: 5px;
-            border: 1px solid #fff;
-            background-color: #3f51b5;
-            color: #fff;
+            border: 2px solid #ecf0f1; /* 他のテキストエリアと揃えた色 */
+            background-color: #34495e; /* 他のテキストエリアと同じ背景色 */
+            color: #ecf0f1; /* テキスト色 */
             resize: none;
         }
 
@@ -165,7 +165,7 @@
             <div class="crime-list" id="otherList"></div>
 
             <!-- 備考欄 -->
-            <textarea class="remark-textarea" id="remark" placeholder="備考を入力してください"></textarea>
+            <textarea class="remark-textarea" id="remark" placeholder="備考を入力してください" oninput="updateOutput()"></textarea>
         </div>
 
         <div class="output-container">
