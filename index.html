@@ -219,7 +219,7 @@
             const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
 
             const fineFormatted = fine.toLocaleString();
-            const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年`;
+            const outputText = `罪状: ${text}\n罰金: $${fineFormatted}\n刑期: ${jail}分`;
 
             document.getElementById('output').value = outputText;
         }
