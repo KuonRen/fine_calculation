@@ -102,18 +102,35 @@
             background-color: #ffb300; /* 金色の濃い色 */
         }
 
-        /* アイコンを追加 */
-        .icon {
-            width: 24px;
-            height: 24px;
-            vertical-align: middle;
-            margin-right: 10px;
+        .remark-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .remark-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .remark-textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            background-color: #3f51b5;
+            color: #fff;
+            resize: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2><img src="HOK1.PNG" class="icon" alt="警察バッジ">罰金計算</h2>
+        <h2><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Police_badge_icon.svg/1200px-Police_badge_icon.svg.png" class="icon" alt="警察バッジ">罰金計算</h2>
 
         <div class="category">
             <div class="category-title">【強盗罪】</div>
@@ -138,6 +155,11 @@
         <div class="output-container">
             <textarea id="output" readonly></textarea>
             <button onclick="copyToClipboard()">コピー</button>
+        </div>
+
+        <div class="remark-container">
+            <div class="remark-title">備考</div>
+            <textarea class="remark-textarea" id="remarks" placeholder="備考を記入してください..."></textarea>
         </div>
     </div>
 
@@ -219,7 +241,7 @@
             const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
 
             const fineFormatted = fine.toLocaleString();
-            const outputText = `罪状: ${text}\n罰金: $${fineFormatted}\n刑期: ${jail}分`;
+            const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年`;
 
             document.getElementById('output').value = outputText;
         }
