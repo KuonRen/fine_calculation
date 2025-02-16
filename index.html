@@ -179,7 +179,10 @@
             const fine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
             const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
 
-            output.value = `罪状: ${text}\n\n罰金合計: ${fine}\n刑務時間合計: ${jail}分`;
+            // 罰金を3桁ごとにカンマ区切りに変換
+            const fineFormatted = fine.toLocaleString();
+
+            output.value = `罪状: ${text}\n\n罰金合計: ${fineFormatted}\n刑務時間合計: ${jail}分`;
         }
 
         function copyToClipboard() {
