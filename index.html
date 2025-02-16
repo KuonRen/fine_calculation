@@ -5,109 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>罰金計算</title>
     <style>
-        /* グローバル設定 */
+        /* 高級感を出すためのデザイン */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef; /* 優しい灰色 */
-            color: #4e5d6b; /* 落ち着いたグレー */
+            font-family: 'Georgia', serif; /* 高級感のあるフォント */
+            background-color: #f4f4f9; /* 優雅で落ち着いた背景色 */
+            color: #2c3e50; /* 深いグレーの文字色 */
             margin: 0;
             padding: 0;
         }
         h2 {
             text-align: center;
-            color: #3a4750; /* 落ち着いた濃いグレー */
-            font-size: 32px;
-            margin-top: 30px;
-            font-weight: 600;
+            color: #34495e; /* 上品な濃いブルー */
+            font-size: 36px;
+            margin-top: 40px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 40px auto;
             padding: 30px;
-            background-color: #ffffff; /* 背景白 */
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .category {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .category-title {
             font-weight: bold;
-            font-size: 18px;
-            color: #5c6b7b; /* やや暗めの青グレー */
-            margin-bottom: 15px;
-            border-bottom: 2px solid #f1f1f1;
+            font-size: 20px;
+            color: #8e44ad; /* 落ち着いた紫色 */
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
             padding-bottom: 10px;
         }
 
         .crime-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .crime-item {
-            padding: 12px 20px;
-            border: 2px solid #ced4da; /* 柔らかなグレー */
-            background-color: #f8f9fa; /* 薄い灰色 */
+            padding: 14px 24px;
+            border: 2px solid #ecf0f1;
+            background-color: #f8f9fa;
             cursor: pointer;
             text-align: center;
-            font-size: 14px;
-            border-radius: 5px;
+            font-size: 16px;
+            border-radius: 8px;
             transition: background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .crime-item:hover {
-            background-color: #e2e6ea; /* やわらかなホバー効果 */
-            border-color: #adb5bd; /* 微妙な青みがかったグレー */
+            background-color: #ecf0f1;
+            border-color: #bdc3c7;
         }
 
         .crime-item.selected {
-            background-color: #6c757d; /* 落ち着いたグレー */
+            background-color: #2c3e50; /* 深いグリーンのような色 */
             color: white;
-            border-color: #5a6268;
+            border-color: #16a085;
         }
 
         .output-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         textarea {
             width: 75%;
-            height: 100px;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ced4da;
+            height: 120px;
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #ecf0f1;
             resize: none;
-            background-color: #f8f9fa;
-            color: #4e5d6b; /* 穏やかな色調 */
+            background-color: #f4f4f9;
+            color: #2c3e50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         button {
             width: 20%;
             height: 50px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             border: none;
-            background-color: #6c757d; /* 落ち着いたグレー */
+            background-color: #16a085; /* ゴールドに近い緑色 */
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: background-color 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         button:hover {
-            background-color: #5a6268; /* ほんのり暗いグレー */
-        }
-
-        .crime-item, button {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #1abc9c;
         }
 
         /* レスポンシブ対応 */
@@ -235,14 +236,14 @@
 
             // 罰金を3桁ごとにカンマ区切りに変換
             const fineFormatted = fine.toLocaleString();
-
-            output.value = `罪状: ${text}\n\n罰金合計: ${fineFormatted}\n刑務時間合計: ${jail}分`;
+            const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年`;
+            document.getElementById('output').value = outputText;
         }
 
         function copyToClipboard() {
-            output.select();
+            const outputText = document.getElementById('output');
+            outputText.select();
             document.execCommand('copy');
-            alert("コピーしました！");
         }
     </script>
 </body>
