@@ -5,128 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>罰金計算</title>
     <style>
-        /* 全体のデザイン */
         body {
-            font-family: 'Georgia', serif; /* 高級感のあるフォント */
-            background-color: #2c3e50; /* 黒に近いダークブルー */
-            color: #ecf0f1; /* 白っぽいテキストカラー */
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
 
         h2 {
             text-align: center;
-            color: #f39c12; /* ゴールド色 */
-            font-size: 36px;
-            margin-top: 40px;
-            font-weight: 700;
-            text-transform: uppercase;
+            color: #555;
         }
 
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: #34495e; /* 深いグレー */
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .category {
-            margin-bottom: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .category-title {
             font-weight: bold;
-            font-size: 20px;
-            color: #f39c12; /* ゴールド色 */
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
+            margin: 20px 0;
         }
 
         .crime-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .crime-item {
-            padding: 14px 24px;
-            border: 2px solid #ecf0f1;
-            background-color: #2c3e50; /* ダークな色合い */
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 5px 0;
             cursor: pointer;
-            text-align: center;
-            font-size: 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s, border-color 0.3s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* 非選択時のhoverを削除 */
-        .crime-item:hover {
-            background-color: inherit; /* 水色のホバーを削除 */
-            border-color: #ecf0f1; /* デフォルトのボーダー色に戻す */
-        }
-
-        /* 選択状態をオレンジに設定 */
         .crime-item.selected {
-            background-color: #e67e22; /* オレンジ色 */
-            color: #2c3e50; /* ダークブルー */
-            border-color: #e67e22;
-        }
-
-        .output-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
+            background-color: #e0e0e0;
         }
 
         textarea {
-            width: 75%;
-            height: 120px;
-            padding: 14px;
+            width: 100%;
+            height: 100px;
+            padding: 10px;
             font-size: 16px;
-            border-radius: 8px;
-            border: 2px solid #ecf0f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             resize: none;
-            background-color: #34495e;
-            color: #ecf0f1;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button {
-            width: 20%;
-            height: 50px;
-            cursor: pointer;
-            font-size: 18px;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
             border: none;
-            background-color: #f39c12; /* ゴールド */
-            color: #2c3e50;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: #e67e22; /* 少しオレンジがかったゴールド */
-        }
-
-        /* レスポンシブ対応 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-
-            textarea {
-                width: 60%;
-            }
-
-            button {
-                width: 35%;
-            }
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -135,46 +79,38 @@
         <h2>罰金計算</h2>
 
         <div class="category">
-            <div class="category-title">【強盗罪】</div>
+            <div class="category-title">強盗罪</div>
             <div class="crime-list" id="robberyList"></div>
         </div>
 
         <div class="category">
-            <div class="category-title">【強盗未遂罪】</div>
+            <div class="category-title">強盗未遂罪</div>
             <div class="crime-list" id="robberyAttemptList"></div>
         </div>
 
         <div class="category">
-            <div class="category-title">【殺人罪・殺人未遂罪】</div>
+            <div class="category-title">殺人罪・殺人未遂罪</div>
             <div class="crime-list" id="murderList"></div>
         </div>
 
         <div class="category">
-            <div class="category-title">【その他】</div>
+            <div class="category-title">その他</div>
             <div class="crime-list" id="otherList"></div>
         </div>
 
-        <div class="output-container">
-            <textarea id="output" readonly></textarea>
-            <button onclick="copyToClipboard()">コピー</button>
-        </div>
+        <textarea id="output" readonly></textarea>
+        <button onclick="copyToClipboard()">コピー</button>
     </div>
 
     <script>
         const crimes = {
             robbery: [
                 { name: "第1級強盗罪", fine: 30000, jailTime: 40 },
-                { name: "第2級強盗罪", fine: 25000, jailTime: 35 },
-                { name: "第3級強盗罪", fine: 20000, jailTime: 30 },
-                { name: "第4級強盗罪", fine: 15000, jailTime: 25 },
-                { name: "第5級強盗罪", fine: 10000, jailTime: 20 }
+                { name: "第2級強盗罪", fine: 25000, jailTime: 35 }
             ],
             robberyAttempt: [
                 { name: "第1級強盗未遂罪", fine: 20000, jailTime: 25 },
-                { name: "第2級強盗未遂罪", fine: 15000, jailTime: 20 },
-                { name: "第3級強盗未遂罪", fine: 10000, jailTime: 15 },
-                { name: "第4級強盗未遂罪", fine: 7500, jailTime: 10 },
-                { name: "第5級強盗未遂罪", fine: 5000, jailTime: 5 }
+                { name: "第2級強盗未遂罪", fine: 15000, jailTime: 20 }
             ],
             murder: [
                 { name: "殺人罪", fine: 100000, jailTime: 40 },
@@ -182,22 +118,7 @@
             ],
             other: [
                 { name: "拉致監禁罪", fine: 50000, jailTime: 30 },
-                { name: "公然わいせつ罪", fine: 5000, jailTime: 5 },
-                { name: "車両窃盗罪", fine: 20000, jailTime: 15 },
-                { name: "車両窃盗未遂罪", fine: 10000, jailTime: 10 },
-                { name: "窃盗罪", fine: 15000, jailTime: 10 },
-                { name: "窃盗未遂罪", fine: 7500, jailTime: 5 },
-                { name: "暴行罪", fine: 10000, jailTime: 10 },
-                { name: "器物損壊罪", fine: 8000, jailTime: 10 },
-                { name: "公務執行妨害罪", fine: 20000, jailTime: 20 },
-                { name: "違法薬物売買罪", fine: 50000, jailTime: 30 },
-                { name: "違法薬物所持罪", fine: 20000, jailTime: 15 },
-                { name: "指定違法物所持罪", fine: 15000, jailTime: 10 },
-                { name: "共犯罪", fine: 30000, jailTime: 20 },
-                { name: "IDカード、免許証不携帯", fine: 5000, jailTime: 5 },
-                { name: "ガンライセンス不携帯、無免許", fine: 10000, jailTime: 10 },
-                { name: "テロ罪", fine: 150000, jailTime: 90 },
-                { name: "業務妨害罪", fine: 10000, jailTime: 10 }
+                { name: "窃盗罪", fine: 15000, jailTime: 10 }
             ]
         };
 
@@ -238,7 +159,7 @@
             const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
 
             const fineFormatted = fine.toLocaleString();
-            const outputText = `罪状: ${text}\n罰金: $${fineFormatted}\n刑期: ${jail}分`;
+            const outputText = `罪状: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}分`;
 
             document.getElementById('output').value = outputText;
         }
