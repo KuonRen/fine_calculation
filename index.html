@@ -5,119 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>罰金計算</title>
     <style>
-        /* 警察関連デザイン */
+        /* 全体のデザイン */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1a237e; /* 警察ブルー */
-            color: #fff;
+            font-family: 'Georgia', serif; /* 高級感のあるフォント */
+            background-color: #2c3e50; /* 黒に近いダークブルー */
+            color: #ecf0f1; /* 白っぽいテキストカラー */
             margin: 0;
             padding: 0;
         }
 
         h2 {
             text-align: center;
-            font-size: 28px;
-            margin-top: 30px;
-            color: #ffcc00; /* 金色: 警察のロゴカラー */
+            color: #f39c12; /* ゴールド色 */
+            font-size: 36px;
+            margin-top: 40px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .container {
-            width: 90%;
             max-width: 800px;
             margin: 40px auto;
-            padding: 20px;
-            background-color: #3f51b5; /* ネイビーブルー */
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background-color: #34495e; /* 深いグレー */
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .category {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .category-title {
-            font-size: 20px;
             font-weight: bold;
-            color: #ffcc00; /* 金色 */
-            margin-bottom: 10px;
-            text-decoration: underline;
+            font-size: 20px;
+            color: #f39c12; /* ゴールド色 */
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
         }
 
         .crime-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .crime-item {
-            padding: 10px 15px;
-            background-color: #536dfe; /* 警察ブルー */
-            border-radius: 5px;
+            padding: 14px 24px;
+            border: 2px solid #ecf0f1;
+            background-color: #2c3e50; /* ダークな色合い */
             cursor: pointer;
             text-align: center;
-            font-size: 14px;
-            transition: background-color 0.3s;
-            border: 2px solid #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .crime-item:hover {
+            background-color: inherit;
+            border-color: #ecf0f1;
         }
 
         .crime-item.selected {
-            background-color: #ffcc00; /* 金色 */
-            color: #1a237e; /* 警察ブルー */
-            border-color: #ffcc00;
+            background-color: #e67e22; /* オレンジ色 */
+            color: #2c3e50;
+            border-color: #e67e22;
         }
 
         .output-container {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* 高さの中央揃え */
-            margin-top: 20px;
+            align-items: center;
+            margin-top: 30px;
         }
 
         textarea {
             width: 75%;
-            height: 100px;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #fff;
-            background-color: #3f51b5; /* ネイビーブルー */
-            color: #fff;
+            height: 120px;
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #ecf0f1;
             resize: none;
+            background-color: #34495e;
+            color: #ecf0f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button {
             width: 20%;
-            height: 40px;
-            background-color: #ffcc00; /* 金色 */
-            color: #1a237e; /* 警察ブルー */
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+            height: 50px;
             cursor: pointer;
+            font-size: 18px;
+            border: none;
+            background-color: #f39c12; /* ゴールド */
+            color: #2c3e50;
+            border-radius: 8px;
+            transition: background-color 0.3s;
             font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            background-color: #ffb300; /* 金色の濃い色 */
+            background-color: #e67e22; /* 少しオレンジがかったゴールド */
         }
 
-        .remark-container {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .remark-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffcc00;
-            margin-bottom: 10px;
-        }
-
+        /* 備考欄のデザイン */
         .remark-textarea {
             width: 100%;
-            height: 80px;
+            height: 60px;  /* 少し小さくしました */
             padding: 10px;
             font-size: 14px;
             border-radius: 5px;
@@ -126,11 +124,26 @@
             color: #fff;
             resize: none;
         }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            textarea {
+                width: 60%;
+            }
+
+            button {
+                width: 35%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Police_badge_icon.svg/1200px-Police_badge_icon.svg.png" class="icon" alt="警察バッジ">罰金計算</h2>
+        <h2>罰金計算</h2>
 
         <div class="category">
             <div class="category-title">【強盗罪】</div>
@@ -150,11 +163,9 @@
         <div class="category">
             <div class="category-title">【その他】</div>
             <div class="crime-list" id="otherList"></div>
-        </div>
 
-        <div class="remark-container">
-            <div class="remark-title">備考</div>
-            <textarea class="remark-textarea" id="remarks" placeholder="備考を記入してください..."></textarea>
+            <!-- 備考欄 -->
+            <textarea class="remark-textarea" id="remark" placeholder="備考を入力してください"></textarea>
         </div>
 
         <div class="output-container">
@@ -239,25 +250,18 @@
             const text = selectedCrimes.map(c => c.name).join(', ');
             const fine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
             const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
+            const remark = document.getElementById('remark').value;
 
             const fineFormatted = fine.toLocaleString();
-            const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年`;
+            const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年\n備考: ${remark}`;
 
             document.getElementById('output').value = outputText;
         }
 
         function copyToClipboard() {
-            const outputText = document.getElementById('output').value;
-            const remarks = document.getElementById('remarks').value;
-
-            const fullText = `${outputText}\n備考: ${remarks}`;
-
-            const textArea = document.createElement('textarea');
-            textArea.value = fullText;
-            document.body.appendChild(textArea);
-            textArea.select();
+            const outputText = document.getElementById('output');
+            outputText.select();
             document.execCommand('copy');
-            document.body.removeChild(textArea);
         }
     </script>
 </body>
