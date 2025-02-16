@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>罰金計算</title>
     <style>
-        /* シンプルなデザイン */
+        /* 警察関連デザイン */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a237e; /* 警察ブルー */
+            color: #fff;
             margin: 0;
             padding: 0;
         }
@@ -18,6 +18,7 @@
             text-align: center;
             font-size: 28px;
             margin-top: 30px;
+            color: #ffcc00; /* 金色: 警察のロゴカラー */
         }
 
         .container {
@@ -25,9 +26,9 @@
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #3f51b5; /* ネイビーブルー */
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .category {
@@ -37,7 +38,9 @@
         .category-title {
             font-size: 20px;
             font-weight: bold;
+            color: #ffcc00; /* 金色 */
             margin-bottom: 10px;
+            text-decoration: underline;
         }
 
         .crime-list {
@@ -48,17 +51,20 @@
 
         .crime-item {
             padding: 10px 15px;
-            background-color: #ddd;
+            background-color: #536dfe; /* 警察ブルー */
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
             font-size: 14px;
             transition: background-color 0.3s;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .crime-item.selected {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #ffcc00; /* 金色 */
+            color: #1a237e; /* 警察ブルー */
+            border-color: #ffcc00;
         }
 
         .output-container {
@@ -73,29 +79,40 @@
             padding: 10px;
             font-size: 14px;
             border-radius: 5px;
-            border: 1px solid #ddd;
+            border: 1px solid #fff;
+            background-color: #3f51b5; /* ネイビーブルー */
+            color: #fff;
             resize: none;
         }
 
         button {
             width: 20%;
             height: 40px;
-            background-color: #4CAF50;
-            color: white;
+            background-color: #ffcc00; /* 金色 */
+            color: #1a237e; /* 警察ブルー */
             font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #ffb300; /* 金色の濃い色 */
+        }
+
+        /* アイコンを追加 */
+        .icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>罰金計算</h2>
+        <h2><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Police_badge_icon.svg/1200px-Police_badge_icon.svg.png" class="icon" alt="警察バッジ">罰金計算</h2>
 
         <div class="category">
             <div class="category-title">【強盗罪】</div>
