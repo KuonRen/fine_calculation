@@ -68,10 +68,11 @@
             border-color: #1abc9c;
         }
 
+        /* 選択状態をオレンジに設定 */
         .crime-item.selected {
-            background-color: #f39c12; /* ゴールド */
+            background-color: #e67e22; /* オレンジ色 */
             color: #2c3e50; /* ダークブルー */
-            border-color: #f39c12;
+            border-color: #e67e22;
         }
 
         .output-container {
@@ -235,7 +236,6 @@
             const fine = selectedCrimes.reduce((sum, c) => sum + c.fine, 0);
             const jail = Math.min(60, selectedCrimes.reduce((sum, c) => sum + c.jailTime, 0));
 
-            // 罰金を3桁ごとにカンマ区切りで表示
             const fineFormatted = fine.toLocaleString();
             const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年`;
 
