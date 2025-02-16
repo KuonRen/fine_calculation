@@ -177,7 +177,7 @@
         <!-- 備考セクション -->
         <div class="remark-section">
             <div class="category-title">備考</div>
-            <textarea class="remark-textarea" id="remark" placeholder="備考を入力してください" oninput="updateOutput()"></textarea>
+            <textarea class="remark-textarea" id="remark" placeholder="義務ではないが特殊な対応時などの際に記入…" oninput="updateOutput()"></textarea>
         </div>
 
         <div class="output-container">
@@ -265,7 +265,7 @@
             const remark = document.getElementById('remark').value;
 
             const fineFormatted = fine.toLocaleString();
-            const outputText = `選択した罪: ${text}\n罰金: ¥${fineFormatted}\n刑期: ${jail}年\n備考: ${remark}`;
+            const outputText = `罪状: ${text}\n罰金: $${fineFormatted}\n刑期: ${jail}分\n備考: ${remark}`;
 
             document.getElementById('output').value = outputText;
         }
