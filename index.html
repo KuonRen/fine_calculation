@@ -112,7 +112,16 @@
             background-color: #e67e22; /* 少しオレンジがかったゴールド */
         }
 
-        /* 備考欄のデザイン */
+        /* 備考セクションのデザイン */
+        .remark-section {
+            margin-top: 40px;
+        }
+
+        .remark-section .category-title {
+            font-size: 22px;
+            color: #f39c12; /* ゴールド色 */
+        }
+
         .remark-textarea {
             width: calc(100% - 28px); /* 左右のパディングを考慮して横幅を均等に */
             height: 60px;  /* 少し小さくしました */
@@ -163,8 +172,11 @@
         <div class="category">
             <div class="category-title">【その他】</div>
             <div class="crime-list" id="otherList"></div>
+        </div>
 
-            <!-- 備考欄 -->
+        <!-- 備考セクション -->
+        <div class="remark-section">
+            <div class="category-title">備考</div>
             <textarea class="remark-textarea" id="remark" placeholder="備考を入力してください" oninput="updateOutput()"></textarea>
         </div>
 
