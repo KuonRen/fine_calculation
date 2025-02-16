@@ -152,14 +152,14 @@
             <div class="crime-list" id="otherList"></div>
         </div>
 
-        <div class="output-container">
-            <textarea id="output" readonly></textarea>
-            <button onclick="copyToClipboard()">コピー</button>
-        </div>
-
         <div class="remark-container">
             <div class="remark-title">備考</div>
             <textarea class="remark-textarea" id="remarks" placeholder="備考を記入してください..."></textarea>
+        </div>
+
+        <div class="output-container">
+            <textarea id="output" readonly></textarea>
+            <button onclick="copyToClipboard()">コピー</button>
         </div>
     </div>
 
@@ -247,9 +247,17 @@
         }
 
         function copyToClipboard() {
-            const outputText = document.getElementById('output');
-            outputText.select();
+            const outputText = document.getElementById('output').value;
+            const remarks = document.getElementById('remarks').value;
+
+            const fullText = `${outputText}\n備考: ${remarks}`;
+
+            const textArea = document.createElement('textarea');
+            textArea.value = fullText;
+            document.body.appendChild(textArea);
+            textArea.select();
             document.execCommand('copy');
+            document.body.removeChild(textArea);
         }
     </script>
 </body>
