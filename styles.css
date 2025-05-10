@@ -1,1 +1,83 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2C3E50;
+    color: #ECF0F1;
+    margin: 0;
+    padding: 0;
+}
 
+h2 {
+    text-align: center;
+    color: #F1C40F;
+    font-size: 36px;
+    margin-top: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #34495E;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.category {
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-weight: bold;
+    font-size: 20px;
+    color: #F1C40F;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ECF0F1;
+    padding-bottom: 10px;
+}
+
+.crime-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.crime-item {
+    padding: 14px 24px;
+    border: 2px solid #ECF0F1;
+    background-color: #2C3E50;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.crime-item:hover {
+    background-color: #1A242F;
+    border-color: #F1C40F;
+}
+
+.crime-item.selected {
+    background-color: #F1C40F;
+    color: #2C3E50;
+    border-color: #F1C40F;
+}
+
+/* 備考セクション */
+.remark-section {
+    margin-top: 40px;
+}
+
+.remark-textarea {
+    width: calc(100% - 28px);
+    height: 60px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 2px solid #ECF0F1;
+    background-color: #34495E;
+    color: #ECF0F1;
+    resize: none;
+}
