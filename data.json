@@ -1,9 +1,24 @@
 {
     "robbery": [
         { "name": "第1級強盗罪", "fine": 30000, "jailTime": 40 },
-        { "name": "第2級強盗罪", "fine": 25000, "jailTime": 35 }
+        { "name": "第2級強盗罪", "fine": 25000, "jailTime": 35 },
+        { "name": "第3級強盗罪", "fine": 20000, "jailTime": 30 },
+        { "name": "第4級強盗罪", "fine": 15000, "jailTime": 25 },
+        { "name": "第5級強盗罪", "fine": 10000, "jailTime": 20 }
     ],
     "robberyAttempt": [
-        { "name": "第1級強盗未遂罪", "fine": 20000, "jailTime": 25 }
+        { "name": "第1級強盗未遂罪", "fine": 20000, "jailTime": 25 },
+        { "name": "第2級強盗未遂罪", "fine": 15000, "jailTime": 20 },
+        { "name": "第3級強盗未遂罪", "fine": 10000, "jailTime": 15 },
+        { "name": "第4級強盗未遂罪", "fine": 7500, "jailTime": 10 },
+        { "name": "第5級強盗未遂罪", "fine": 5000, "jailTime": 5 }
+    ],
+    "murder": [
+        { "name": "殺人罪", "fine": 100000, "jailTime": 40 },
+        { "name": "殺人未遂罪", "fine": 75000, "jailTime": 20 }
+    ],
+    "other": [
+        { "name": "拉致監禁罪", "fine": 50000, "jailTime": 30 },
+        { "name": "業務妨害罪", "fine": 10000, "jailTime": 10 }
     ]
 }
