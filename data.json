@@ -1,1 +1,9 @@
-
+{
+    "robbery": [
+        { "name": "第1級強盗罪", "fine": 30000, "jailTime": 40 },
+        { "name": "第2級強盗罪", "fine": 25000, "jailTime": 35 }
+    ],
+    "robberyAttempt": [
+        { "name": "第1級強盗未遂罪", "fine": 20000, "jailTime": 25 }
+    ]
+}
