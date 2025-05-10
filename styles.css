@@ -1,83 +1,142 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #2C3E50;
-    color: #ECF0F1;
-    margin: 0;
-    padding: 0;
-}
+            font-family: 'Arial', sans-serif; /* 警察風のシンプルなフォント */
+            background-color: #2C3E50; /* 警察のダークブルー */
+            color: #ECF0F1; /* 明るい文字色 */
+            margin: 0;
+            padding: 0;
+        }
 
 h2 {
-    text-align: center;
-    color: #F1C40F;
-    font-size: 36px;
-    margin-top: 40px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
+            text-align: center;
+            color: #F1C40F; /* 警察のバッジのようなゴールド */
+            font-size: 36px;
+            margin-top: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
 
 .container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #34495E;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #34495E; /* 警察の制服のダークグレー */
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
 
 .category {
-    margin-bottom: 40px;
-}
+            margin-bottom: 40px;
+        }
 
 .category-title {
-    font-weight: bold;
-    font-size: 20px;
-    color: #F1C40F;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ECF0F1;
-    padding-bottom: 10px;
-}
+            font-weight: bold;
+            font-size: 20px;
+            color: #F1C40F; /* ゴールド色 */
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ECF0F1;
+            padding-bottom: 10px;
+        }
 
 .crime-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
 .crime-item {
-    padding: 14px 24px;
-    border: 2px solid #ECF0F1;
-    background-color: #2C3E50;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    border-radius: 8px;
-    transition: background-color 0.3s, border-color 0.3s;
-}
+            padding: 14px 24px;
+            border: 2px solid #ECF0F1;
+            background-color: #2C3E50; /* 警察ダークブルー */
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
 .crime-item:hover {
-    background-color: #1A242F;
-    border-color: #F1C40F;
-}
+            background-color: #1A242F; /* 警察風のダークシェード */
+            border-color: #F1C40F; /* ゴールドのホバー効果 */
+        }
 
 .crime-item.selected {
-    background-color: #F1C40F;
-    color: #2C3E50;
-    border-color: #F1C40F;
-}
+            background-color: #F1C40F; /* 選択時のゴールド色 */
+            color: #2C3E50;
+            border-color: #F1C40F;
+        }
 
-/* 備考セクション */
-.remark-section {
-    margin-top: 40px;
-}
+.output-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
 
-.remark-textarea {
-    width: calc(100% - 28px);
-    height: 60px;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 2px solid #ECF0F1;
-    background-color: #34495E;
-    color: #ECF0F1;
-    resize: none;
-}
+textarea {
+            width: 75%;
+            height: 120px;
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #ECF0F1;
+            resize: none;
+            background-color: #34495E; /* 一貫した背景色 */
+            color: #ECF0F1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+button {
+            width: 20%;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+            background-color: #F1C40F; /* ゴールド */
+            color: #2C3E50;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #D35400; /* オレンジ系に変化 */
+        }
+
+        /* 備考セクションのデザイン */
+        .remark-section {
+            margin-top: 40px;
+        }
+
+        .remark-section .category-title {
+            font-size: 22px;
+            color: #F1C40F; /* ゴールド色 */
+        }
+
+        .remark-textarea {
+            width: calc(100% - 28px); /* 左右のパディングを考慮して横幅を均等に */
+            height: 60px;  /* 少し小さくしました */
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 2px solid #ECF0F1; /* 他のテキストエリアと揃えた色 */
+            background-color: #34495E; /* 他のテキストエリアと同じ背景色 */
+            color: #ECF0F1; /* テキスト色 */
+            resize: none;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            textarea {
+                width: 60%;
+            }
+
+            button {
+                width: 35%;
+            }
+        }
